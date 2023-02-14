@@ -2,10 +2,9 @@
   "name": "ksosdiscordbot",
   "version": "1.0.0",
   "description": "ksos discord bot",
-  "main": "./src/index.ts",
+  "main": "./src/index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node ./dist/index.js",
+    "start": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,9 +22,7 @@
     "dotenv": "^16.0.3"
   },
   "devDependencies": {
-    "@types/node": "^18.13.0",
     "eslint": "^8.34.0",
-    "nodemon": "^2.0.20",
-    "typescript": "^4.9.5"
+    "nodemon": "^2.0.20"
   }
 }
