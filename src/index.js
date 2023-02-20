@@ -7,7 +7,14 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, '/commands');
@@ -31,7 +38,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   const command = client.commands.get(interaction.commandName);
-
   if (!command) {
     console.error(`No command matching ${interaction.commandName} was found.`);
     return;
