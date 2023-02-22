@@ -34,6 +34,13 @@ client.once(Events.ClientReady, (c) => {
   console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
+client.on(Events.MessageCreate, async (message) => {
+  if (message.content.includes('/term '))
+    message.channel.send(
+      'https://media.giphy.com/media/l4Jz3a8jO92crUlWM/giphy.gif'
+    );
+});
+
 client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 

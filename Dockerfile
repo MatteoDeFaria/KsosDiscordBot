@@ -2,10 +2,8 @@ FROM node:16.14.2-alpine
 
 WORKDIR /app
 
-COPY ["package.json", "package-lock.json*", "./src/"]
-
-COPY . .
+COPY . /app
 
 RUN npm install
 
-CMD [ "node", "./src/index.js" ]
+CMD [ "npm", "run", "start" ]
