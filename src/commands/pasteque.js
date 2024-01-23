@@ -5,8 +5,6 @@ module.exports = {
     .setName('pasteque')
     .setDescription("Don't throw up !"),
   async execute(interaction) {
-    await interaction.reply(
-      'https://tenor.com/fr/view/pastèque-gif-8714003011562283193',
-    );
+    await interaction.reply('https://tenor.com/kxSobPVJwwv.gif');
   },
 };
