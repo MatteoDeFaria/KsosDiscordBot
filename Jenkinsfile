@@ -1,20 +1,21 @@
 pipeline {
-  agent any
+    agent any
 
-  tools { nodejs: 'node' }
-
-  stages {
-    stage('Checkout code') {
-      steps {
-        git(url: 'https://github.com/MatteoDeFaria/KsosDiscordBot', branch: 'main')
-      }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
     }
-
-    stage('Build') {
-      steps {
-        echo 'Building ...'
-        sh 'npm install'
-      }
-    }
-  }
 }
