@@ -1,6 +1,4 @@
 pipeline {
-    def dockerImage
-
     agent any
 
     environment { // getting stored credentials
