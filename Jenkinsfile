@@ -1,14 +1,11 @@
 pipeline {
-    agent {
-      dockerfile true 
-    }
+    agent any
 
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'node --version'
-                sh 'svn --version'
+                sh 'docker build . -t ksos-bot'
             }
         }
 
@@ -21,6 +18,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                echo 'Runing....'
+                sh 'docker run -d ksos-bot'
             }
         }
     }
