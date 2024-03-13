@@ -1,31 +1,56 @@
 pipeline {
+    def dockerImage
+
     agent any
 
+    environment { // getting stored credentials
+       DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials')
+       IMAGE_NAME = 'tekmatteo/ksos-bot'
+   }
+
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Building..'
-                sh 'docker build . -t ksos-bot'
+                script {
+                    dockerImage = docker.build("${IMAGE_NAME}:${env.BUILD_NUMBER}")
+                }
             }
         }
 
-        stage('Test') {
+        stage('Deploy Docker Image to DockerHub') {
             steps {
-                echo 'Testing..'
+                script {
+                    dockerImage.push()
+                    dockerImage.push('latest')
+                    }
+                }
             }
         }
 
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         echo 'Building..'
+        //         sh 'docker build . -t ksos-bot'
+        //     }
+        // }
 
-        stage('Run') {
-            steps {
-                echo 'Runing....'
-                sh 'docker run -d ksos-bot'
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         echo 'Testing..'
+        //     }
+        // }
+
+        // stage('Deploy') {
+        //     steps {
+        //         echo 'Deploying....'
+        //     }
+        // }
+
+        // stage('Run') {
+        //     steps {
+        //         echo 'Runing....'
+        //         sh 'docker run -d ksos-bot'
+        //     }
+        // }
     }
 }
