@@ -1,19 +1,14 @@
 pipeline {
     agent {
-      docker {
-        image 'node:16.14.2-alpine'
-      }
-    }
-
-    environment {
-      CI = 'true'
+      dockerfile true 
     }
 
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'npm install'
+                sh 'node --version'
+                sh 'svn --version'
             }
         }
 
