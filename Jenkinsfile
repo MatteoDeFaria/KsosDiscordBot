@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-    environment { // getting stored credentials
+    environment {
        registryCredential = 'docker-hub-credentials'
        registry = 'tekmatteo/ksos-bot'
    }
@@ -25,7 +25,13 @@ pipeline {
                     }
                 }
             }
+
+         stage('Cleaning up') {
+            steps {
+                sh "docker rmi $registry:$BUILD_NUMBER"
+            }
         }
+    }
 
         // stage('Build') {
         //     steps {
