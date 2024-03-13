@@ -52,5 +52,5 @@ pipeline {
         //         sh 'docker run -d ksos-bot'
         //     }
         // }
-    }
+        //}
 }
