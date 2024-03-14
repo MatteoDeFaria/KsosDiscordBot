@@ -4,17 +4,18 @@ pipeline {
     environment {
         registryCredential = 'docker-hub-credentials'
         registry = 'tekmatteo/ksos-bot'
+        containerName = 'KsosBot'
         discordToken = credentials('discord-token')
     }
 
     stages {
-        // stage('Stop and clean up old latest Docker Image') {
-        //     steps {
-        //         sh "docker stop $registry:latest"
-        //         sh "docker rm $registry:latest"
-        //         sh "docker rmi $registry:latest"
-        //     }
-        // }
+        stage('Stop and clean up old latest Docker Image') {
+            steps {
+                sh "docker stop $containerName"
+                sh "docker rm $containerName"
+                sh "docker rmi $registry:latest"
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
@@ -43,7 +44,7 @@ pipeline {
 
         stage('Run Docker Image') {
             steps {
-                sh "docker run -d --name $registry:latest --env DISCORD_TOKEN=${discordToken} ${registry}:latest"
+                sh "docker run -d --name $containerName --env DISCORD_TOKEN=${discordToken} ${registry}:latest"
             }
         }
     }
