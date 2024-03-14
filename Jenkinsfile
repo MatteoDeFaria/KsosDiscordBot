@@ -8,13 +8,13 @@ pipeline {
     }
 
     stages {
-        stage('Stop and clean up old latest Docker Image') {
-            steps {
-                sh "docker stop $registry:latest"
-                sh "docker rm $registry:latest"
-                sh "docker rmi $registry:latest"
-            }
-        }
+        // stage('Stop and clean up old latest Docker Image') {
+        //     steps {
+        //         sh "docker stop $registry:latest"
+        //         sh "docker rm $registry:latest"
+        //         sh "docker rmi $registry:latest"
+        //     }
+        // }
 
         stage('Build Docker Image') {
             steps {
@@ -43,7 +43,7 @@ pipeline {
 
         stage('Run Docker Image') {
             steps {
-                sh "docker run -d --env DISCORD_TOKEN=${discordToken} ${registry}:latest"
+                sh "docker run -d --name $registry:latest --env DISCORD_TOKEN=${discordToken} ${registry}:latest"
             }
         }
     }
