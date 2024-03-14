@@ -8,8 +8,10 @@ pipeline {
     }
 
     stages {
-        stage('Clean up old latest Docker Image') {
+        stage('Stop and clean up old latest Docker Image') {
             steps {
+                sh "docker stop $registry:latest"
+                sh "docker rm $registry:latest"
                 sh "docker rmi $registry:latest"
             }
         }
