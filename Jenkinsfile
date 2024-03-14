@@ -4,6 +4,7 @@ pipeline {
     environment {
         registryCredential = 'docker-hub-credentials'
         registry = 'tekmatteo/ksos-bot'
+        discordToken = 'discord-token'
     }
 
     stages {
@@ -34,9 +35,7 @@ pipeline {
 
         stage('Run Docker Image') {
             steps {
-                script {
-                    dockerImage.run()
-               }
+                sh "docker run -d --env DISCORD_TOKEN=${discordToken} ${registry}:latest"
             }
         }
     }
