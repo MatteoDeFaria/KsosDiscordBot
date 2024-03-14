@@ -8,11 +8,11 @@ pipeline {
     }
 
     stages {
-        // stage('Clean up old Docker Image') {
-        //     steps {
-        //         sh "docker rmi $registry:latest"
-        //     }
-        // }
+        stage('Clean up old latest Docker Image') {
+            steps {
+                sh "docker rmi $registry:latest"
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
