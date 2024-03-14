@@ -4,10 +4,16 @@ pipeline {
     environment {
         registryCredential = 'docker-hub-credentials'
         registry = 'tekmatteo/ksos-bot'
-        discordToken = 'discord-token'
+        discordToken = credentials('discord-token')
     }
 
     stages {
+        stage('Clean up old Docker Image') {
+            steps {
+                sh "docker rmi $registry:latest"
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
