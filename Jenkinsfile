@@ -44,7 +44,7 @@ pipeline {
 
         stage('Run Docker Image') {
             steps {
-                sh "docker run -d --name $containerName --env DISCORD_TOKEN=${discordToken} ${registry}:latest"
+                sh "docker run -d --name $containerName --restart always --env DISCORD_TOKEN=${discordToken} ${registry}:latest"
             }
         }
     }
