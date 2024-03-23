@@ -17,12 +17,6 @@ pipeline {
             }
         }
 
-        stage('Cloning Github Repository') {
-            steps {
-                git 'git@github.com:MatteoDeFaria/KsosDiscordBot.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
