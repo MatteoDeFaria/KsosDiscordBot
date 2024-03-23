@@ -20,6 +20,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    checkout scm
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
             }
