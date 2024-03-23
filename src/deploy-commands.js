@@ -65,7 +65,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
     //   .then(() => console.log('Successfully deleted application commands.'))
     //   .catch(console.error);
   } catch (error) {
-    // And of course, make sure you catch and log any errors!
+    // And of course, make sure you catch and log any errors !
     console.error(error);
   }
 })();
