@@ -17,10 +17,15 @@ pipeline {
             }
         }
 
+        stage('Cloning Github Repository') {
+            steps {
+                git 'git@github.com:MatteoDeFaria/KsosDiscordBot.git'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 script {
-                    checkout scm
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
             }
