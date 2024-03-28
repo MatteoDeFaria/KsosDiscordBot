@@ -9,13 +9,13 @@ pipeline {
     }
 
     stages {
-        stage('Stop and clean up old latest Docker Image') {
-            steps {
-                sh "docker stop $containerName"
-                sh "docker rm $containerName"
-                sh "docker rmi $registry:latest"
-            }
-        }
+        // stage('Stop and clean up old latest Docker Image') {
+        //     steps {
+        //         sh "docker stop $containerName"
+        //         sh "docker rm $containerName"
+        //         sh "docker rmi $registry:latest"
+        //     }
+        // }
 
         stage('Build Docker Image') {
             steps {
