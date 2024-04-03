@@ -43,8 +43,7 @@ pipeline {
         }
 
         stage('Run Docker Image') {
-            agent { 
-                node {
+            agent { node {
                     def remote = [:]
                     remote.name = credentials("ssh-name")
                     remote.host = credentials("ssh-host")   
