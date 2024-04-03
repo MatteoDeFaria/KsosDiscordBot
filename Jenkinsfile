@@ -7,9 +7,6 @@ pipeline {
         registry = 'tekmatteo/ksos-bot'
         containerName = 'KsosBot'
         discordToken = credentials('discord-token')
-        sshHost = credentials("ssh-host")   
-        sshUser = credentials("ssh-username")
-        sshPassword = credentials("ssh-password")
     }
 
     stages {
@@ -47,18 +44,9 @@ pipeline {
         }
 
         stage('Run Docker Image') {
-            // node {
-            //     def remote = [:]
-            //     remote.name = credentials("ssh-name")
-            //     remote.host = credentials("ssh-host")   
-            //     remote.user = credentials("ssh-username")
-            //     remote.password = credentials("ssh-password")
-            //     remote.allowAnyHost = true
-            // }
+           agent { node { label 'pi5' } }
             
             steps {
-                sh "ssh ${sshUser}@${sshHost}"
-                sh "${sshPassword}"
                 sh "docker run -d --name $containerName --restart always --env DISCORD_TOKEN=${discordToken} ${registry}:latest"
             }
         }
