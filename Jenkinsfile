@@ -6,6 +6,13 @@ pipeline {
         registry = 'tekmatteo/ksos-bot'
         containerName = 'KsosBot'
         discordToken = credentials('discord-token')
+
+        def remote = [:]
+        remote.name = credentials("ssh-name")
+        remote.host = credentials("ssh-host")   
+        remote.user = credentials("ssh-username")
+        remote.password = credentials("ssh-password")
+        remote.allowAnyHost = true
     }
 
     stages {
@@ -41,13 +48,6 @@ pipeline {
                 sh "docker rmi $registry:$BUILD_NUMBER"
             }
         }
-
-        def remote = [:]
-        remote.name = credentials("ssh-name")
-        remote.host = credentials("ssh-host")   
-        remote.user = credentials("ssh-username")
-        remote.password = credentials("ssh-password")
-        remote.allowAnyHost = true
 
         stage('Run Docker Image') {
             steps {
