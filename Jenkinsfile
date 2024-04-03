@@ -57,8 +57,8 @@ pipeline {
             // }
             
             steps {
-                sh "ssh $sshUser@$sshHost"
-                sh "$sshPassword"
+                sh "ssh ${sshUser}@${sshHost}"
+                sh "${sshPassword}"
                 sh "docker run -d --name $containerName --restart always --env DISCORD_TOKEN=${discordToken} ${registry}:latest"
             }
         }
