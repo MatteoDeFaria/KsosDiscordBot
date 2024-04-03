@@ -1,5 +1,5 @@
 pipeline {
-    agent { node { label 'agent1' } }
+    agent any
 
     environment {
         registryCredential = 'docker-hub-credentials'
