@@ -42,18 +42,18 @@ pipeline {
             }
         }
 
-        agent { 
-            node {
-                def remote = [:]
-                remote.name = credentials("ssh-name")
-                remote.host = credentials("ssh-host")   
-                remote.user = credentials("ssh-username")
-                remote.password = credentials("ssh-password")
-                remote.allowAnyHost = true
-            }
-        }
-
         stage('Run Docker Image') {
+            agent { 
+                node {
+                    def remote = [:]
+                    remote.name = credentials("ssh-name")
+                    remote.host = credentials("ssh-host")   
+                    remote.user = credentials("ssh-username")
+                    remote.password = credentials("ssh-password")
+                    remote.allowAnyHost = true
+                }
+            }
+
             steps {
                 sshCommand remote: remote, command: "docker run -d --name $containerName --restart always --env DISCORD_TOKEN=${discordToken} ${registry}:latest"
 //                    sh "docker run -d --name $containerName --restart always --env DISCORD_TOKEN=${discordToken} ${registry}:latest"
