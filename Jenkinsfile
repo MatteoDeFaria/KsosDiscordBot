@@ -45,7 +45,7 @@ pipeline {
                                         script: "docker ps -q -f name=$containerName",
                                         returnStdout: true
                                     )
-                    if ( ${oldContainerId} != '' ) {
+                    if ( oldContainerId != '' ) {
                         echo "Deleting container id: ${oldContainerId} ..."
                         echo "Deleting container name: $containerName ..."
                         sh "docker stop $containerName"
@@ -58,7 +58,7 @@ pipeline {
                                         script: "docker images -qf reference=$registry:latest",
                                         returnStdout: true
                                     )
-                    if ( ${oldImageId} != '' ) {
+                    if ( oldImageId != '' ) {
                         echo "Deleting image id: ${oldImageId}..."
                         echo "Deleting image name: $registry:latest..."
                         sh "docker rmi $registry:latest"
