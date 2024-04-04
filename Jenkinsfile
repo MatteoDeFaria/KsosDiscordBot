@@ -41,26 +41,17 @@ pipeline {
 
             steps {
                 script {
-                    oldContainerId = sh(
-                                        script: "docker ps -q -f name=$containerName",
-                                        returnStdout: true
-                                    )
-                    if ( oldContainerId != '' ) {
-                        echo "Deleting container id: ${oldContainerId} ..."
-                        echo "Deleting container name: $containerName ..."
+                    oldContainerId = sh(script: "docker ps -q -f name=$containerName", returnStdout: true)
+                    oldImageId = sh(script: "docker images -qf reference=$registry:latest", returnStdout: true)
+
+                    if (oldContainerId != '') {
                         sh "docker stop $containerName"
                         sh "docker rm $containerName"
                     } else {
                         echo "No container to delete..."
                     }
 
-                    oldImageId = sh(
-                                        script: "docker images -qf reference=$registry:latest",
-                                        returnStdout: true
-                                    )
-                    if ( oldImageId != '' ) {
-                        echo "Deleting image id: ${oldImageId}..."
-                        echo "Deleting image name: $registry:latest..."
+                    if (oldImageId != '') {
                         sh "docker rmi $registry:latest"
                     } else {
                         echo "No image to delete..."
